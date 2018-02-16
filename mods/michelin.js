@@ -34,12 +34,13 @@ lineReader.on('line', function(line) {
     address['locality'] = locality;
     restaurant['address'] = address;
     try {
+		console.log( restaurant);
 
       fs.appendFile("rest.json", JSON.stringify(restaurant) + "\n");
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   }).on('error', function(err) {
-    console.log(err)
+   // console.log(err)
   }).end()
 });
