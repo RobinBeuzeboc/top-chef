@@ -5,13 +5,12 @@ const fs = require('fs');
 
 
 //'lil problme here, must reset the file 
-/*
+
 if (fs.existsSync('./rest.json')) {
   fs.truncate('rest.json', 0, function() {
-    console.log('done');
   })
 }
-*/
+
 
 var lineReader = require('readline').createInterface({
   input: require('fs').createReadStream('./links.txt')
@@ -22,13 +21,15 @@ lineReader.on('line', function(line) {
     uri: line,
   }, function(error, response, body) {
     if (error) return console.log(error);
-    var $ = cheerio.load(body);
+    var field = cheerio.load(body);
     var restaurant = {};
-    restaurant['name'] = $('.poi_intro-display-title').text().trim();
-    var thoroughfare = $('.poi_intro-display-address .field__items .thoroughfare').text();
-    var postalcode = $('.poi_intro-display-address .field__items .postal-code').text();
-    var locality = $('.poi_intro-display-address .field__items .locality').text();
+    restaurant['name'] = field('.poi_intro-display-title').text().trim();
+	var locality = field('.poi_intro-display-address .field__items .locality').text();
+    var thoroughfare = field('.poi_intro-display-address .field__items .thoroughfare').text();
+    var postalcode = field('.poi_intro-display-address .field__items .postal-code').text();
+	var price = field('.node_poi-menu-intro node_poi-row .node_po-price .priceRange' ).text();
     var address = {};
+	address['price'] = price;
     address['thoroughfare'] = thoroughfare;
     address['postalcode'] = postalcode;
     address['locality'] = locality;
@@ -38,9 +39,7 @@ lineReader.on('line', function(line) {
 
       fs.appendFile("rest.json", JSON.stringify(restaurant) + "\n");
     } catch (err) {
-      //console.log(err);
     }
   }).on('error', function(err) {
-   // console.log(err)
   }).end()
 });
