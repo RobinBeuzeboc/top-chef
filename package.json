@@ -10,6 +10,7 @@
     "ajax": "0.0.4",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
+    "fs": "0.0.1-security",
     "node": "^9.5.0",
     "node-fetch": "^2.0.0",
     "request": "^2.83.0",

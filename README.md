@@ -47,4 +47,13 @@ Then you'll need to launch all the scrapping scripts: it might take a while
 > npm start
 ```
 
+Now that you have the data you need, you can just see it by running the react app.
+You'll have to follow those commands:
+
+```sh
+> cd ../my-app  && npm install --save reactstrap@next react react-dom && npm start
+```
+And there you go.
+Only problem is that you'll check those websites by yourself. If you're not in a hurry, it is possible to modify the structure of the json file. Maybe someday soon.
+
 [Uncopyrighted](http://zenhabits.net/uncopyright/)
