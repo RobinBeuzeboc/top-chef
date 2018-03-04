@@ -1,6 +1,6 @@
 const request = require('request');
 const fs = require('fs');
-//const cheerio = require('cheerio')
+const cheerio = require('cheerio')
 
 
 let punctuation = ['\'', ' ', '-'];
@@ -9,12 +9,12 @@ let similarTarget = {} //found restaurants
 
 
 var lineReader = require('readline').createInterface({
-  input: require('fs').createReadStream('./rest.json')
+  input: require('fs').createReadStream('./data/rest.json')
 });
 
 
-if (fs.existsSync('./restFork.json')) {
-  fs.truncate('restFork.json', 0, function() {})
+if (fs.existsSync('./data/restFork.json')) {
+  fs.truncate('./data/restFork.json', 0, function() {})
 }
 
 lineReader.on('line', function(line) {
@@ -54,7 +54,7 @@ lineReader.on('line', function(line) {
 
             if (targetAcquired) {
               try {
-                fs.appendFile("restFork.json", JSON.stringify(similarTarget) + "\n"); //add existing restaurant from both michelin  and lafourchette
+                fs.appendFile("./data/restFork.json", JSON.stringify(similarTarget) + "\n"); //add existing restaurant from both michelin  and lafourchette
               } catch (err) {
                 console.log(err);
               }

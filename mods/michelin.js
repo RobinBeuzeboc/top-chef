@@ -6,14 +6,14 @@ const fs = require('fs');
 
 //'lil problme here, must reset the file 
 
-if (fs.existsSync('./rest.json')) {
-  fs.truncate('rest.json', 0, function() {
+if (fs.existsSync('./data/rest.json')) {
+  fs.truncate('./data/rest.json', 0, function() {
   })
 }
 
 
 var lineReader = require('readline').createInterface({
-  input: require('fs').createReadStream('./links.txt')
+  input: require('fs').createReadStream('./data/links.txt')
 });
 
 lineReader.on('line', function(line) {
@@ -37,7 +37,7 @@ lineReader.on('line', function(line) {
     try {
 		console.log( restaurant);
 
-      fs.appendFile("rest.json", JSON.stringify(restaurant) + "\n");
+      fs.appendFile("./data/rest.json", JSON.stringify(restaurant) + "\n");
     } catch (err) {
     }
   }).on('error', function(err) {

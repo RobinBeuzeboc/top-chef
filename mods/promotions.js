@@ -1,13 +1,13 @@
 const request2 = require('request');
 const fs = require('fs');
 
-if (fs.existsSync('./promos.json')) {
-  fs.truncate('./promos.json', 0, function() {
+if (fs.existsSync('./data/proms.json')) {
+  fs.truncate('./data/proms.json', 0, function() {
   })
 }
 
 var lineReader = require('readline').createInterface({
-  input: require('fs').createReadStream('./restFork.json')
+  input: require('fs').createReadStream('./data/restFork.json')
 });
 
 lineReader.on('line', function(line) {
@@ -47,7 +47,7 @@ lineReader.on('line', function(line) {
 		  rest['link'] = content['link']
 
 		  try {
-			fs.appendFile("./proms.json", JSON.stringify(rest) + ",\n", function() {});
+			fs.appendFile("./data/proms.json", JSON.stringify(rest) + ",\n", function() {});
 		  } catch (err) {
 			console.log(err);
 		  }
